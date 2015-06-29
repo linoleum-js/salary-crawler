@@ -1,3 +1,4 @@
 /.idea
-/node_moudules
+/node_modules
 /bower_install
+/build
