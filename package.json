@@ -1,0 +1,11 @@
+{
+  "name": "f7k",
+  "version": "0.1.0",
+
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-concat": "*",
+    "gulp-uglify": "*",
+    "jquery": "*"
+  }
+}
