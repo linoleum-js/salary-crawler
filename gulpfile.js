@@ -2,8 +2,10 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 
 var scripts = [
-  './src/main.js',
-  './src/core/application.js'
+  './src/main.js',,
+  './src/utils/param-validation.js',
+  './src/core/application.js',
+  './src/model/model.js'
 ];
 
 var tryFiles = [
