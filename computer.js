@@ -30,15 +30,10 @@ var compute = function (query) {
       return item + sum;
     }) / tenth;
 
-    var bottomTen = rates.slice(-tenth).reduce(function (item, sum) {
-      return item / sum;
-    }) / tenth;
-
     var content = 'Query: ' + query + "\n";
     content += 'Total jobs reviewed: ' + data.length + "\n";
     content += 'Average:            $' + avrg.toFixed(2) + "/hr\n";
     content += 'Top ten average:    $' + topTen.toFixed(2) + "/hr\n";
-    content += 'Bottom ten average: $' + bottomTen.toFixed(2) + "/hr\n";
 
 
     promise.resolve(content);

@@ -3,12 +3,21 @@ var computer = require('./computer');
 var all = require('node-promise').all;
 var fs = require('fs');
 
-var keywords = ['php', 'ruby', 'rails', 'angular', 'django', 'python'];
 var keywords = [
-  'illustration',
-  'adobe-illustrator',
-  'adobe-photoshop'
+  'php',
+  'ruby',
+  'rails',
+  'angular',
+  'django',
+  'python',
+  'laravel',
+  'react',
+  'backbone',
+  'javascript',
+  'frontend',
+  'node.js'
 ];
+
 var crawlings = [];
 var computings = [];
 
