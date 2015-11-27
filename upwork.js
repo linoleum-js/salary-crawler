@@ -18,9 +18,6 @@ var crawl = function (query) {
 
   var promise = new Promise();
 
-  var dateFormat = function () {
-    return new Date().toISOString().replace(/T.*/, '');
-  };
 
   var crawler = new Crawler({
     callback: function (error, result, $) {
@@ -90,7 +87,7 @@ var crawl = function (query) {
   });
 
   var runCrawler = function () {
-    var pageNumber = Math.ceil(total / 10);
+    var pageNumber = Math.floor(total / 10);
     pageNumber = pageNumber > maxPages ? maxPages : pageNumber;
     var queueList = [];
 

@@ -4,8 +4,17 @@ var all = require('node-promise').all;
 var fs = require('fs');
 
 var keywords = ['php', 'ruby', 'rails', 'angular', 'django', 'python'];
+var keywords = [
+  'illustration',
+  'adobe-illustrator',
+  'adobe-photoshop'
+];
 var crawlings = [];
 var computings = [];
+
+var dateFormat = function () {
+  return new Date().toISOString().replace(/T.*/, '').replace(/\-/g, '.');
+};
 
 var compute = function () {
   console.log('Computing started');
@@ -15,8 +24,11 @@ var compute = function () {
 
   all(computings).then(function (data) {
     console.log('Computing finished');
-    console.log("\n" + data.join("\n") + "\n");
-    fs.writeFile('./data/results.txt', data.join("\n"), function (error) {
+    var dataStr = data.join("\n");
+    console.log("\n" + dataStr + "\n");
+
+    dataStr = 'Upwork salary statistics ' + dateFormat() + "\n\n" + dataStr;
+    fs.writeFile('./data/results.txt', dataStr, function (error) {
       if (error) {
         console.log(error);
       }
