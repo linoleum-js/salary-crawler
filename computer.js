@@ -36,7 +36,11 @@ var compute = function (query) {
     content += 'Top ten average:    $' + topTen.toFixed(2) + "/hr\n";
 
 
-    promise.resolve(content);
+    promise.resolve({
+      content: content,
+      avrg: avrg,
+      topTen: topTen
+    });
     console.log('Computing finished: ' + query);
   });
 

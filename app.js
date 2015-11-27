@@ -15,7 +15,12 @@ var keywords = [
   'backbone',
   'javascript',
   'frontend',
-  'node.js'
+  'node.js',
+  'android',
+  'java',
+  'c++',
+  'asp.net',
+  'wordpress'
 ];
 
 var crawlings = [];
@@ -33,10 +38,28 @@ var compute = function () {
 
   all(computings).then(function (data) {
     console.log('Computing finished');
-    var dataStr = data.join("\n");
+    var content = data.map(function (item) {
+      return item.content;
+    });
+    var dataStr = content.join("\n");
     console.log("\n" + dataStr + "\n");
 
-    dataStr = 'Upwork salary statistics ' + dateFormat() + "\n\n" + dataStr;
+    console.log(data);
+
+    var avrg = data.reduce(function (sum, item) {
+      return sum + item.avrg;
+    }, 0) / data.length;
+
+    var topTen = data.reduce(function (sum, item) {
+      return sum + item.topTen;
+    }, 0) / data.length;
+
+    var header = 'Upwork salary statistics ' + dateFormat() + "\n\n";
+    header += 'Industry average:         $' + avrg.toFixed(2) + "/hr\n";
+    header += 'Industry top ten average: $' + topTen.toFixed(2) + "/hr\n\n\n";
+
+    dataStr = header + dataStr;
+
     fs.writeFile('./data/results.txt', dataStr, function (error) {
       if (error) {
         console.log(error);
