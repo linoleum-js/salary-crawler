@@ -1,0 +1,61 @@
+Upwork salary statistics 2015.11.27
+
+Query: php
+Total jobs reviewed: 278
+Average:            $12.78/hr
+Top ten average:    $33.43/hr
+
+Query: ruby
+Total jobs reviewed: 48
+Average:            $16.26/hr
+Top ten average:    $36.18/hr
+
+Query: rails
+Total jobs reviewed: 33
+Average:            $16.41/hr
+Top ten average:    $39.91/hr
+
+Query: angular
+Total jobs reviewed: 77
+Average:            $17.78/hr
+Top ten average:    $35.27/hr
+
+Query: django
+Total jobs reviewed: 18
+Average:            $16.49/hr
+Top ten average:    $39.01/hr
+
+Query: python
+Total jobs reviewed: 57
+Average:            $17.44/hr
+Top ten average:    $36.89/hr
+
+Query: laravel
+Total jobs reviewed: 21
+Average:            $15.66/hr
+Top ten average:    $36.58/hr
+
+Query: react
+Total jobs reviewed: 18
+Average:            $19.42/hr
+Top ten average:    $41.30/hr
+
+Query: backbone
+Total jobs reviewed: 8
+Average:            $16.31/hr
+Top ten average:    $23.18/hr
+
+Query: javascript
+Total jobs reviewed: 262
+Average:            $15.44/hr
+Top ten average:    $37.25/hr
+
+Query: frontend
+Total jobs reviewed: 37
+Average:            $16.43/hr
+Top ten average:    $31.68/hr
+
+Query: node.js
+Total jobs reviewed: 56
+Average:            $17.73/hr
+Top ten average:    $31.91/hr
