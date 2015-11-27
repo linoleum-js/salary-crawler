@@ -1,0 +1,3 @@
+Query: php
+Average:         10.79
+Top ten average: 30.89
