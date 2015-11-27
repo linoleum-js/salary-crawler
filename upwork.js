@@ -18,6 +18,12 @@ var crawl = function (query) {
 
   var promise = new Promise();
 
+  if (fs.existsSync('./data/upwork-' + query + '.json')) {
+    console.log('Upwork crawling finish: ' + query);
+    promise.resolve();
+    return promise;
+  }
+
 
   var crawler = new Crawler({
     callback: function (error, result, $) {

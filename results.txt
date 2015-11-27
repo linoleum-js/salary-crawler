@@ -1,9 +1,13 @@
 Upwork salary statistics 2015.11.27
 
+Industry average:         $15.99/hr
+Industry top ten average: $38.71/hr
+
+
 Query: php
-Total jobs reviewed: 278
-Average:            $12.78/hr
-Top ten average:    $33.43/hr
+Total jobs reviewed: 16
+Average:            $9.83/hr
+Top ten average:    $32.22/hr
 
 Query: ruby
 Total jobs reviewed: 48
@@ -59,3 +63,28 @@ Query: node.js
 Total jobs reviewed: 56
 Average:            $17.73/hr
 Top ten average:    $31.91/hr
+
+Query: android
+Total jobs reviewed: 136
+Average:            $15.78/hr
+Top ten average:    $40.01/hr
+
+Query: java
+Total jobs reviewed: 103
+Average:            $14.33/hr
+Top ten average:    $30.75/hr
+
+Query: c++
+Total jobs reviewed: 200
+Average:            $15.11/hr
+Top ten average:    $38.10/hr
+
+Query: asp.net
+Total jobs reviewed: 46
+Average:            $20.57/hr
+Top ten average:    $96.55/hr
+
+Query: wordpress
+Total jobs reviewed: 208
+Average:            $10.75/hr
+Top ten average:    $31.25/hr
