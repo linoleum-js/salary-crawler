@@ -45,8 +45,8 @@ var itemCrawler = new Crawler({
     var total = texts.pop();
 
     var totalText = total.find('strong').text();
-    /\$(.*)\s/.exec(totalText);
-    totalText = +RegExp.$1.replace(',', '.');
+    /\$([\d\,]+)\s/.exec(totalText);
+    totalText = +RegExp.$1.replace(',', '');
 
     var rateText = rate.find('strong').text();
     /\$(.*)\//.exec(rateText);
@@ -56,11 +56,11 @@ var itemCrawler = new Crawler({
     /([\d\,]+)/.exec(hours);
     hours = +RegExp.$1.replace(',', '.');
 
-
     var dataItem = {
       total: totalText,
       rate: rateText,
-      hours: hours
+      hours: hours,
+      url: result.uri
     };
 
     data.push(dataItem);
@@ -74,7 +74,8 @@ var itemCrawler = new Crawler({
 
 var runCrawler = function () {
   var pageNumber = Math.ceil(total / 10);
-  pageNumber = pageNumber > 10 ? 10 : pageNumber;
+  var maxPages = 5;
+  pageNumber = pageNumber > maxPages ? maxPages : pageNumber;
   var queueList = [];
 
   for (var i = 1; i < pageNumber; i++) {
@@ -85,6 +86,7 @@ var runCrawler = function () {
 };
 
 console.time('time');
+
 crawler.queue({
   uri: baseUrlWithQuery + '&page=1&q=php',
   callback: function (error, result) {
