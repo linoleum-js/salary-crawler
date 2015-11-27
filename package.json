@@ -1,0 +1,8 @@
+{
+  "name": "salary-research",
+  "version": "0.0.1",
+
+  "dependencies": {
+    "crawler": "*"
+  }
+}
