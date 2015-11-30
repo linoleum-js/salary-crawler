@@ -1,0 +1,10 @@
+Upwork salary statistics 2015.11.28
+
+Industry average:         $9.83/hr
+Industry top ten average: $32.22/hr
+
+
+Query: php
+Total jobs reviewed: 16
+Average:            $9.83/hr
+Top ten average:    $32.22/hr

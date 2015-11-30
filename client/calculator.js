@@ -6,7 +6,7 @@ var compute = function (query) {
   var fs = require('fs');
 
   var promise = new Promise();
-  var filename = './data/upwork-' + query + '.json';
+  var filename = 'crawling-data/upwork-' + query + '.json';
 
   console.log('Computing started: ' + query);
 

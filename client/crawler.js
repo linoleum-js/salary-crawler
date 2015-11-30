@@ -8,7 +8,7 @@ var crawl = function (query) {
   var baseUrl = 'https://www.upwork.com/o/jobs/browse/url';
   var baseQuery = 'duration=months,ongoing&workload=full_time&t=0';
   var baseUrlWithQuery = baseUrl + '?' + baseQuery;
-  var maxPages = 50;
+  var maxPages = 3;
 
   var urlsCiphers = [];
   var data = [];
@@ -17,12 +17,6 @@ var crawl = function (query) {
   var query;
 
   var promise = new Promise();
-
-  if (fs.existsSync('./data/upwork-' + query + '.json')) {
-    console.log('Upwork crawling finish: ' + query);
-    promise.resolve();
-    return promise;
-  }
 
 
   var crawler = new Crawler({
@@ -83,7 +77,7 @@ var crawl = function (query) {
 
     onDrain: function () {
       fs.writeFile(
-        './data/upwork-' + query  + '.json',
+        'crawling-data/upwork-' + query  + '.json',
         JSON.stringify(data, null, 4)
       );
       promise.resolve();

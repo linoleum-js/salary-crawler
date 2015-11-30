@@ -4,6 +4,7 @@
 
   "dependencies": {
     "crawler": "*",
-    "node-promise": "*"
+    "node-promise": "*",
+    "stringbuilder": "*"
   }
 }
