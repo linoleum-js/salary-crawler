@@ -5,6 +5,7 @@
   "dependencies": {
     "crawler": "*",
     "node-promise": "*",
-    "stringbuilder": "*"
+    "stringbuilder": "*",
+    "mongodb": "*"
   }
 }
