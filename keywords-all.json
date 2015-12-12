@@ -1,4 +1,5 @@
 [
+  "javascript",
   "php",
   "ruby",
   "rails",
@@ -8,7 +9,6 @@
   "laravel",
   "react",
   "backbone",
-  "javascript",
   "frontend",
   "node.js",
   "android",

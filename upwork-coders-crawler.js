@@ -1,9 +1,18 @@
 
 var Crawler = require('crawler');
 var util = require('util');
-var fs = require('fs');
 var Promise = require('node-promise').Promise;
 var all = require('node-promise').all;
+var fs = require('fs');
+
+var logPath = './crawler.log';
+if (fs.existsSync(logPath)) {
+  fs.unlinkSync(logPath);
+}
+var fileDescriptor = fs.openSync(logPath, 'a');
+var log = function () {
+  console.log.apply(console, arguments);
+};
 
 var UpworkCodersCrawler = function (query) {
   this.BASE_URL = 'https://www.upwork.com';
@@ -30,7 +39,7 @@ UpworkCodersCrawler.prototype.collectLinksOnPage = function (pageNumber) {
   var collected = new Promise();
   var self = this;
 
-  console.log('Start collect links on page', pageNumber);
+  log('Start collect links on page', pageNumber);
 
   var callback = function (error, result, $) {
     $('.oProfileTileTitle a').each(function (i, item) {
@@ -41,7 +50,7 @@ UpworkCodersCrawler.prototype.collectLinksOnPage = function (pageNumber) {
   };
 
   var onDrain = function () {
-    console.log('Finish collect links on page', pageNumber);
+    log('Finish collect links on page', pageNumber);
     collected.resolve(self.links);
   };
 
@@ -68,16 +77,15 @@ UpworkCodersCrawler.prototype.collectLinks = function () {
   var promises = [];
   var self = this;
 
-  console.log('Start links collecting');
+  log('Start links collecting', self.query);
 
   // get max page number
   var crawler = new Crawler({
     callback: function (error, result, $) {
       var lastPageButton = $('.pagination .active a');
       var lastPageNumber = +lastPageButton.html();
-      console.log('lastPageNumber', lastPageNumber);
+      // var lastPageNumber = 100;
 
-      lastPageNumber = 1;
       for (var i = 1; i <= lastPageNumber; i++) {
         promises.push(
           self.collectLinksOnPage(i)
@@ -85,7 +93,7 @@ UpworkCodersCrawler.prototype.collectLinks = function () {
       }
 
       all(promises).then(function () {
-        console.log('Finish links collecting');
+        log('Finish links collecting', self.query);
         collected.resolve(self.links);
       });
     }
@@ -104,7 +112,7 @@ UpworkCodersCrawler.prototype.parseProfile = function (url) {
   var parsed = new Promise();
   var self = this;
 
-  console.log('Start parsing profile', url);
+  log('Start parsing profile', url);
 
   var crawler = new Crawler({
     callback: function (error, result, $) {
@@ -115,8 +123,20 @@ UpworkCodersCrawler.prototype.parseProfile = function (url) {
       var dataCrawler = new Crawler({
         callback: function (error, result) {
           result = JSON.parse(result.body);
-          self.data = self.data.concat(result.assignments);
-          console.log('Finish parsing profile', url);
+
+          if (result.assignments) {
+            var jobs = result.assignments.filter(function (item) {
+              return item.totalHours && item.hourlyRate;
+            });
+
+            if (result.assignments.length) {
+              self.data.push({
+                assignments: jobs
+              });
+            }
+          }
+
+          log('Finish parsing profile', url);
           parsed.resolve();
         }
       });
@@ -141,8 +161,8 @@ UpworkCodersCrawler.prototype.parseProfiles = function (urls) {
   var parsed = new Promise();
   var self = this;
 
-  console.log('Start profiles parsing');
-  console.log(urls);
+  log('Start profiles parsing');
+  log(urls);
 
   urls.forEach(function (url) {
     promises.push(
@@ -152,7 +172,7 @@ UpworkCodersCrawler.prototype.parseProfiles = function (urls) {
 
   all(promises).then(function () {
     parsed.resolve();
-    console.log('Finish prifiles parsing');
+    log('Finish prifiles parsing');
   });
 
   return parsed;
@@ -165,7 +185,7 @@ UpworkCodersCrawler.prototype.run = function () {
   self
     .collectLinks(this.query)
     .then(function (data) {
-      var crawled = self.parseProfiles([data[0]]);
+      var crawled = self.parseProfiles(data);
 
       crawled.then(function () {
         promise.resolve(self.data);

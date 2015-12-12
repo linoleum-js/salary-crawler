@@ -9,4 +9,5 @@ MongoClient.connect(url, function(err, db) {
   }
 
   db.collection('projects').remove();
+  db.close();
 });

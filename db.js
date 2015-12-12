@@ -3,7 +3,7 @@ var Promise = require('node-promise').Promise;
 
 var url = 'mongodb://localhost:27017/salaries';
 
-module.exports.saveProjects = function (data) {
+module.exports.saveCoder = function (keyword, data) {
   var promise = new Promise();
 
   MongoClient.connect(url, function(err, db) {
@@ -12,14 +12,30 @@ module.exports.saveProjects = function (data) {
       return;
     }
 
-    db.collection('projects').insert(data, function (error, result) {
+    db.collection(keyword).remove();
+    db.collection(keyword).insert(data, function (error, result) {
       if (error) {
         console.log(error);
         return;
       }
       promise.resolve(result);
+      db.close();
     });
   });
 
   return promise;
+};
+
+module.exports.get = function (key, callback) {
+  MongoClient.connect(url, function (error, db) {
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    callback(db.collection(key).find({
+    }));
+
+    // db.close();
+  });
 };
