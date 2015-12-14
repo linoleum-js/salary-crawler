@@ -137,7 +137,20 @@ UpworkCodersCrawler.prototype.parseProfile = function (url) {
 
     callback: function (error, result, $) {
       var regexp = /\"userId\"\:\"(\d{18})/;
-      var id = regexp.exec(result.body)[1];
+      var idRes = regexp.exec(result.body);
+
+      if (!idRes || !idRes[1]) {
+        error(
+          'No user id in the page',
+          url,
+          'for query',
+          self.query
+        );
+        parsed.resolve();
+        return;
+      }
+
+      var id = idRes[1];
       var dataUrl = self.PROFILE_DATA_URL + id;
 
       var dataCrawler = new Crawler({
@@ -149,9 +162,13 @@ UpworkCodersCrawler.prototype.parseProfile = function (url) {
           } catch (e) {
             error(
               'Failed to parse json for',
-              url
+              url,
+              'for query',
+              self.query
             );
-            result = {};
+
+            parsed.resolve();
+            return;
           }
 
           if (result.assignments) {
