@@ -1,16 +1,24 @@
 
 var db = require('./db.js');
 var fs = require('fs');
+var timer = require('./timer.js');
 
-db.get('javascript', function (data) {
-  data.limit(20).each(function (error, doc) {
-    if (!doc) { return; }
+timer.start();
 
-    var jobs = doc.assignments.filter(function (item) {
-      return item.totalHours && item.hourlyRate;
-    });
+db.init(function (db) {
+  var collection = db.collection('javascript');
+  var data = collection.find();
 
-    console.log(jobs);
+  data.each(function (error, doc) {
+    // console.log(doc);
+    if (!doc) {
+      console.log('finish');
+      timer.stop();
+      db.close();
+      return;
+    }
+
+    var jobs = doc.assignments;
 
     var average = jobs.reduce(function (sum, item) {
       return sum + item.hourlyRate.amount;
@@ -20,11 +28,26 @@ db.get('javascript', function (data) {
       return sum + item.totalHours;
     }, 0);
 
-    var weightedAverage = jobs.reduce(function (sum, item) {
+    var totalEarned = jobs.reduce(function (sum, item) {
       return sum + item.totalHours * item.hourlyRate.amount;
-    }, 0) / totalHours;
+    }, 0);
 
-    console.log('average', average);
-    console.log('weightedAverage', weightedAverage);
+    var weightedAverage = totalEarned / totalHours;
+
+    collection.update(
+      {
+        _id: doc._id
+      },
+      {
+        $set: {
+          calculated: {
+            average: average,
+            weightedAverage: weightedAverage,
+            totalHours: totalHours,
+            totalEarned: totalEarned
+          }
+        }
+      }
+    );
   });
 });

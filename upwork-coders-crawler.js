@@ -10,6 +10,12 @@ if (fs.existsSync(logPath)) {
   fs.unlinkSync(logPath);
 }
 var fileDescriptor = fs.openSync(logPath, 'a');
+var error = function () {
+  fs.writeSync(
+    fileDescriptor,
+    [].join.call(arguments, ' ')
+  );
+};
 var log = function () {
   console.log.apply(console, arguments);
 };
@@ -21,8 +27,8 @@ var UpworkCodersCrawler = function (query) {
   this.PROFILE_DATA_URL = this.BASE_URL + '/freelancers/api/v1/profile/';
 
   this.HEADERS = Object.freeze({
-    'x-xsrf-token': '50322f515a2b5a81fba4e95e2933918e',
-    'x-odesk-csrf-token': '50322f515a2b5a81fba4e95e2933918e',
+    'x-xsrf-token': 'c30494367484d4c724a3b70897f97c7f',
+    'x-odesk-csrf-token': 'c30494367484d4c724a3b70897f97c7f',
     'cookie': 'session_id=a55d99407cf83e479f06bc6ee59567c5'
   });
   this.AJAX_HEADERS = JSON.parse(JSON.stringify(this.HEADERS));
@@ -55,6 +61,7 @@ UpworkCodersCrawler.prototype.collectLinksOnPage = function (pageNumber) {
   };
 
   var crawler = new Crawler({
+    maxConnections: 100,
     callback: callback,
     onDrain: onDrain
   });
@@ -81,15 +88,26 @@ UpworkCodersCrawler.prototype.collectLinks = function () {
 
   // get max page number
   var crawler = new Crawler({
+    maxConnections: 100,
+
     callback: function (error, result, $) {
       var lastPageButton = $('.pagination .active a');
       var lastPageNumber = +lastPageButton.html();
-      // var lastPageNumber = 100;
+      // var lastPageNumber = 1;
 
       for (var i = 1; i <= lastPageNumber; i++) {
-        promises.push(
-          self.collectLinksOnPage(i)
-        );
+        try {
+          promises.push(
+            self.collectLinksOnPage(i)
+          );
+        } catch (e) {
+          error(
+            'Failed to collect links on page ',
+            i,
+            ', for query',
+            self.query
+          );
+        }
       }
 
       all(promises).then(function () {
@@ -115,14 +133,26 @@ UpworkCodersCrawler.prototype.parseProfile = function (url) {
   log('Start parsing profile', url);
 
   var crawler = new Crawler({
+    maxConnections: 100,
+
     callback: function (error, result, $) {
       var regexp = /\"userId\"\:\"(\d{18})/;
       var id = regexp.exec(result.body)[1];
       var dataUrl = self.PROFILE_DATA_URL + id;
 
       var dataCrawler = new Crawler({
+        maxConnections: 100,
+
         callback: function (error, result) {
-          result = JSON.parse(result.body);
+          try {
+            result = JSON.parse(result.body);
+          } catch (e) {
+            error(
+              'Failed to parse json for',
+              url
+            );
+            result = {};
+          }
 
           if (result.assignments) {
             var jobs = result.assignments.filter(function (item) {
@@ -165,9 +195,16 @@ UpworkCodersCrawler.prototype.parseProfiles = function (urls) {
   log(urls);
 
   urls.forEach(function (url) {
-    promises.push(
-      self.parseProfile(url)
-    );
+    try {
+      promises.push(
+        self.parseProfile(url)
+      );
+    } catch (e) {
+      error(
+        'Failed to parse profile',
+        url
+      );
+    }
   });
 
   all(promises).then(function () {

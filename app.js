@@ -14,17 +14,22 @@ console.time('time');
 fs.readFile('./keywords.json', 'utf8', function (error, data) {
   var keywords = JSON.parse(data);
 
-  keywords.forEach(function (key) {
+  var crawl = function () {
+    var key = keywords.pop();
     var upworkCodersCrawler = new UpworkCodersCrawler(key);
 
     upworkCodersCrawler.run().then(function (data) {
       db.saveCoder(key, data).then(function () {
         console.log('Writing finished', key);
-        if (++count === keywords.length) {
+        if (keywords.length) {
+          crawl();
+        } else {
           console.log('All writing finished');
           timer.stop();
         }
       });
     });
-  });
+  };
+
+  crawl();
 });

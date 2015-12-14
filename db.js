@@ -26,16 +26,13 @@ module.exports.saveCoder = function (keyword, data) {
   return promise;
 };
 
-module.exports.get = function (key, callback) {
+module.exports.init = function (callback) {
   MongoClient.connect(url, function (error, db) {
     if (error) {
       console.log(error);
       return;
     }
 
-    callback(db.collection(key).find({
-    }));
-
-    // db.close();
+    callback(db);
   });
 };
