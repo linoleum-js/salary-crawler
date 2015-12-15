@@ -6,7 +6,7 @@ var timer = require('./timer.js');
 timer.start();
 
 db.init(function (db) {
-  var collection = db.collection('javascript');
+  var collection = db.collection('grails');
   var data = collection.find();
 
   data.each(function (error, doc) {

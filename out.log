@@ -1,0 +1,133 @@
+BACKBONE
+  totalHours:       1086987.28hrs
+  average hours:    643.95hrs
+  simple average:   $17.04/hr
+  weighted average: $22.75/hr
+  top ten average:  $43.73/hr
+
+ANGULAR
+  totalHours:       1424022.74hrs
+  average hours:    662.95hrs
+  simple average:   $15.46/hr
+  weighted average: $20.18/hr
+  top ten average:  $42.64/hr
+
+GROOVY
+  totalHours:       276097.06hrs
+  average hours:    686.81hrs
+  simple average:   $15.07/hr
+  weighted average: $23.01/hr
+  top ten average:  $45.73/hr
+
+RUBY
+  totalHours:       1946260.23hrs
+  average hours:    776.64hrs
+  simple average:   $20.11/hr
+  weighted average: $24.53/hr
+  top ten average:  $51.06/hr
+
+LARAVEL
+  totalHours:       1782494.44hrs
+  average hours:    646.30hrs
+  simple average:   $12.83/hr
+  weighted average: $16.84/hr
+  top ten average:  $39.10/hr
+
+REACT
+  totalHours:       262180.75hrs
+  average hours:    518.14hrs
+  simple average:   $18.36/hr
+  weighted average: $25.70/hr
+  top ten average:  $45.31/hr
+
+GRAILS
+  totalHours:       258907.91hrs
+  average hours:    591.11hrs
+  simple average:   $13.50/hr
+  weighted average: $22.38/hr
+  top ten average:  $40.53/hr
+
+DJANGO
+  totalHours:       1391707.33hrs
+  average hours:    593.48hrs
+  simple average:   $16.60/hr
+  weighted average: $22.37/hr
+  top ten average:  $45.73/hr
+
+ASP.NET
+  totalHours:       2184468.76hrs
+  average hours:    787.20hrs
+  simple average:   $13.37/hr
+  weighted average: $17.63/hr
+  top ten average:  $38.13/hr
+
+JAVASCRIPT
+  totalHours:       1842815.27hrs
+  average hours:    535.39hrs
+  simple average:   $13.87/hr
+  weighted average: $16.56/hr
+  top ten average:  $42.88/hr
+
+FRONTEND
+  totalHours:       2689806.55hrs
+  average hours:    862.67hrs
+  simple average:   $15.79/hr
+  weighted average: $19.70/hr
+  top ten average:  $43.99/hr
+
+PYTHON
+  totalHours:       1536200.16hrs
+  average hours:    555.79hrs
+  simple average:   $18.33/hr
+  weighted average: $24.62/hr
+  top ten average:  $48.72/hr
+
+PHP
+  totalHours:       2104956.91hrs
+  average hours:    590.62hrs
+  simple average:   $12.83/hr
+  weighted average: $13.71/hr
+  top ten average:  $40.38/hr
+
+NODE.JS
+  totalHours:       1965525.54hrs
+  average hours:    628.16hrs
+  simple average:   $19.13/hr
+  weighted average: $23.01/hr
+  top ten average:  $48.19/hr
+
+C++
+  totalHours:       1223763.14hrs
+  average hours:    566.03hrs
+  simple average:   $18.19/hr
+  weighted average: $20.45/hr
+  top ten average:  $51.08/hr
+
+ANDROID
+  totalHours:       1922492.63hrs
+  average hours:    578.02hrs
+  simple average:   $17.26/hr
+  weighted average: $20.45/hr
+  top ten average:  $48.41/hr
+
+RAILS
+  totalHours:       1999998.84hrs
+  average hours:    762.78hrs
+  simple average:   $20.03/hr
+  weighted average: $24.31/hr
+  top ten average:  $50.90/hr
+
+JAVA
+  totalHours:       1586980.51hrs
+  average hours:    608.74hrs
+  simple average:   $17.16/hr
+  weighted average: $22.49/hr
+  top ten average:  $49.57/hr
+
+WORDPRESS
+  totalHours:       2746429.77hrs
+  average hours:    696.18hrs
+  simple average:   $10.60/hr
+  weighted average: $9.89/hr
+  top ten average:  $31.16/hr
+
