@@ -70,8 +70,8 @@ db.init(function (db) {
       fs.writeSync(
         out,
         key.toUpperCase() + '\n' +
-        '  totalHours:       ' + totalHours.toFixed(2) + 'hrs\n' +
-        '  average hours:    ' + (totalHours / length).toFixed(2) + 'hrs\n' +
+        // '  totalHours:       ' + totalHours.toFixed(2) + 'hrs\n' +
+        // '  average hours:    ' + (totalHours / length).toFixed(2) + 'hrs\n' +
         '  simple average:   $' + (sumOfAverage / length).toFixed(2) + '/hr\n' +
         '  weighted average: $' + (totalEarned / totalHours).toFixed(2) + '/hr\n' +
         '  top ten average:  $' + (sumOfAverage10 / totalHours10).toFixed(2) + '/hr\n\n'
