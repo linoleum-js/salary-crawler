@@ -10,10 +10,10 @@ if (fs.existsSync(logPath)) {
   fs.unlinkSync(logPath);
 }
 var fileDescriptor = fs.openSync(logPath, 'a');
-var error = function () {
+var errorLog = function () {
   fs.writeSync(
     fileDescriptor,
-    [].join.call(arguments, ' ')
+    [].join.call(arguments, ' ') + '\n'
   );
 };
 var log = function () {
@@ -101,7 +101,7 @@ UpworkCodersCrawler.prototype.collectLinks = function () {
             self.collectLinksOnPage(i)
           );
         } catch (e) {
-          error(
+          errorLog(
             'Failed to collect links on page ',
             i,
             ', for query',
@@ -140,7 +140,7 @@ UpworkCodersCrawler.prototype.parseProfile = function (url) {
       var idRes = regexp.exec(result.body);
 
       if (!idRes || !idRes[1]) {
-        error(
+        errorLog(
           'No user id in the page',
           url,
           'for query',
@@ -160,7 +160,7 @@ UpworkCodersCrawler.prototype.parseProfile = function (url) {
           try {
             result = JSON.parse(result.body);
           } catch (e) {
-            error(
+            errorLog(
               'Failed to parse json for',
               url,
               'for query',
@@ -217,7 +217,7 @@ UpworkCodersCrawler.prototype.parseProfiles = function (urls) {
         self.parseProfile(url)
       );
     } catch (e) {
-      error(
+      errorLog(
         'Failed to parse profile',
         url
       );
